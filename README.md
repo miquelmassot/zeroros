@@ -13,6 +13,12 @@ for communication between processes. It is not intended to be a replacement for 
     <a href="https://github.com/miquelmassot/zeroros/actions/workflows/python-publish.yml">
         <img alt="Wheels" src="https://github.com/miquelmassot/zeroros/actions/workflows/python-publish.yml/badge.svg">
     </a>
+    <a href="https://github.com/miquelmassot/zeroros">
+    	<img src="https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20macOS-blue.svg" alt="platforms" />
+    </a>
+    <a href="https://github.com/miquelmassot/zeroros">
+    	<img src="https://static.pepy.tech/badge/zeroros" alt="Downloads" />
+    </a>
     <a href="https://github.com/miquelmassot/zeroros/blob/main/LICENSE">
         <img alt="License" src="https://img.shields.io/badge/License-BSD_3--Clause-blue.svg">
     </a>
