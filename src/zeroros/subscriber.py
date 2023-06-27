@@ -17,7 +17,7 @@ class Subscriber:
         message_class: type[Message],
         callback_handle: callable,
         ip: str = "127.0.0.1",
-        port: int = 5560,
+        port: int = 5556,
     ):
         self.ip = ip
         self.port = port

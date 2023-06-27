@@ -13,7 +13,7 @@ class Publisher:
         topic: str,
         message_class: type[Message],
         ip: str = "127.0.0.1",
-        port: int = 5559,
+        port: int = 5555,
     ):
         print("Creating publisher for topic: ", topic)
         self.topic = validate_topic(topic)
