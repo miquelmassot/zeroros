@@ -17,7 +17,7 @@ class Timer:
         self.thread = threading.Timer(sleep_for, self._calback_wrapper)
         self.thread.start()
 
-    def cancel(self):
+    def stop(self):
         self.thread.cancel()
 
 

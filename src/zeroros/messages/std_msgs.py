@@ -29,9 +29,6 @@ class GenericTypeData(Message):
     def __init__(self, data):
         self.data = data
 
-    def __str__(self):
-        return "String:\n  - data={}\n".format(self.data)
-
     def to_json(self):
         return {"data": self.data}
 
@@ -43,17 +40,59 @@ class String(GenericTypeData):
     def __init__(self, data: str = ""):
         super().__init__(data)
 
+    def __str__(self):
+        return "String:\n  - data={}\n".format(self.data)
+
 
 class Int(GenericTypeData):
     def __init__(self, data: int = 0):
         super().__init__(data)
+
+    def __str__(self):
+        return "Int:\n  - data={}\n".format(self.data)
+
+
+class Int8(Int):
+    def __str__(self):
+        return "Int8:\n  - data={}\n".format(self.data)
+
+
+class Int16(Int):
+    def __str__(self):
+        return "Int16:\n  - data={}\n".format(self.data)
+
+
+class Int32(Int):
+    def __str__(self):
+        return "Int32:\n  - data={}\n".format(self.data)
+
+
+class Int64(Int):
+    def __str__(self):
+        return "Int64:\n  - data={}\n".format(self.data)
 
 
 class Float(GenericTypeData):
     def __init__(self, data: float = 0.0):
         super().__init__(data)
 
+    def __str__(self):
+        return "Float:\n  - data={}\n".format(self.data)
+
+
+class Float32(Float):
+    def __str__(self):
+        return "Float32:\n  - data={}\n".format(self.data)
+
+
+class Float64(Float):
+    def __str__(self):
+        return "Float64:\n  - data={}\n".format(self.data)
+
 
 class Bool(GenericTypeData):
     def __init__(self, data: bool = False):
         super().__init__(data)
+
+    def __str__(self):
+        return "Bool:\n  - data={}\n".format(self.data)

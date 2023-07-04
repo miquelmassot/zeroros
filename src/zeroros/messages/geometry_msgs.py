@@ -85,9 +85,15 @@ class Quaternion(Message):
         self.z = sy * cp * cr - cy * sp * sr
 
     def to_euler(self):
-        roll = np.arctan2(2.0 * (self.w * self.x + self.y * self.z), 1.0 - 2.0 * (self.x * self.x + self.y * self.y))
+        roll = np.arctan2(
+            2.0 * (self.w * self.x + self.y * self.z),
+            1.0 - 2.0 * (self.x * self.x + self.y * self.y),
+        )
         pitch = np.arcsin(2.0 * (self.w * self.y - self.z * self.x))
-        yaw = np.arctan2(2.0 * (self.w * self.z + self.x * self.y), 1.0 - 2.0 * (self.y * self.y + self.z * self.z))
+        yaw = np.arctan2(
+            2.0 * (self.w * self.z + self.x * self.y),
+            1.0 - 2.0 * (self.y * self.y + self.z * self.z),
+        )
         return roll, pitch, yaw
 
     def to_json(self):
