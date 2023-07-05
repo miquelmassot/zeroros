@@ -18,19 +18,24 @@ class MessageBroker:
     def config_broker(self):
         """connects, binds, and configure sockets"""
         # https://zguide.zeromq.org/docs/chapter2/#The-Dynamic-Discovery-Problem
-        self.context = zmq.Context()
-        frontend = self.context.socket(zmq.XSUB)
-        frontend.bind("tcp://" + str(self.ip) + ":" + str(self.xsub_port))
-        backend = self.context.socket(zmq.XPUB)
-        backend.bind("tcp://" + str(self.ip) + ":" + str(self.xpub_port))
+        try:
+            self.context = zmq.Context()
+            frontend = self.context.socket(zmq.XSUB)
+            frontend.bind("tcp://" + str(self.ip) + ":" + str(self.xsub_port))
+            backend = self.context.socket(zmq.XPUB)
+            backend.bind("tcp://" + str(self.ip) + ":" + str(self.xpub_port))
 
-        # built-in pub/sub fowarder
-        zmq.proxy(frontend, backend)
-
-        # Shouldn't get here
-        frontend.close()
-        backend.close()
-        self.context.term()
+            # built-in pub/sub fowarder
+            zmq.proxy(frontend, backend)
+        except zmq.error.ContextTerminated:
+            print("Context terminated")
+        except Exception as e:
+            print("Error: ", e)
+        finally:
+            # Shouldn't get here
+            frontend.close()
+            backend.close()
+            self.context.term()
 
     def stop(self):
         self.context.term()
