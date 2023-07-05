@@ -32,10 +32,8 @@ class MessageBroker:
         except Exception as e:
             print("Error: ", e)
         finally:
-            # Shouldn't get here
             frontend.close()
             backend.close()
-            self.context.term()
 
     def stop(self):
         self.context.term()
