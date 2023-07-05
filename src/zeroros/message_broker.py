@@ -32,6 +32,9 @@ class MessageBroker:
         backend.close()
         self.context.term()
 
+    def stop(self):
+        self.context.term()
+
 
 if __name__ == "__main__":
     MessageBroker()
