@@ -18,10 +18,13 @@ class Subscriber:
         callback_handle: callable,
         ip: str = "127.0.0.1",
         port: int = 5556,
+        verbose: bool = False,
     ):
         self.ip = ip
         self.port = port
-        print("Subscribing to topic: ", topic)
+        self.verbose = verbose
+        if self.verbose:
+            print("Subscribing to topic: ", topic)
         self.topic = validate_topic(topic)
         self.message_class = message_class
         self.url = "tcp://" + str(self.ip) + ":" + str(self.port)
@@ -47,7 +50,8 @@ class Subscriber:
             except Exception as e:
                 print(f"Error for topic {self.topic} on {self.ip}:{self.port}: {e}")
             time.sleep(0.05)
-        print("Stopping subscriber")
+        if self.verbose:
+            print("Stopping subscriber")
         # Check if the socket is still open
         if self.sock.closed is False:
             self.sock.close()

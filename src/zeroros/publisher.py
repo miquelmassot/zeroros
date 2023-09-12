@@ -14,8 +14,10 @@ class Publisher:
         message_class: type[Message],
         ip: str = "127.0.0.1",
         port: int = 5555,
+        verbose: bool = False,
     ):
-        print("Creating publisher for topic: ", topic)
+        if verbose:
+            print("Creating publisher for topic: ", topic)
         self.topic = validate_topic(topic)
         self.message_class = message_class
         self.ip = ip
