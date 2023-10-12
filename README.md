@@ -25,6 +25,9 @@ for communication between processes. It is not intended to be a replacement for 
     <br/>
 </p>
 
+## Why ZeroROS?
+See these discussions in [ROS Discourse](https://discourse.ros.org/t/teaching-with-ros-or-zeroros-at-university/32124) and this one in [reddit/ROS](https://www.reddit.com/r/ROS/comments/14kh7pt/teaching_ros_zeroros_at_university_students/).
+
 ## Installation
 Use pip to install the library:
 
