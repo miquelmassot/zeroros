@@ -2,12 +2,17 @@ import asyncio
 import json
 import threading
 import time
+import sys
 
 import zmq
 import zmq.asyncio
 
 from zeroros.messages import Header, Message
 from zeroros.topic import validate_topic
+
+
+if sys.platform == 'win32':
+   asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 
 class Subscriber:
