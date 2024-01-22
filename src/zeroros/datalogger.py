@@ -20,6 +20,8 @@ class DataLogger:
         self.file.write(
             '{"class": "'
             + str(type(msg).__name__)
+            + '", "timestamp": "'
+            + str(datetime.datetime.now().timestamp())
             + '", "message": '
             + json.dumps(msg.to_json())
             + "}\n"
