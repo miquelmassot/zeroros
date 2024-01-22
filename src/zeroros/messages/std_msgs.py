@@ -1,4 +1,4 @@
-import time
+import datetime
 import numpy as np
 import numpy.typing as npt
 
@@ -11,7 +11,7 @@ class Header:
         self.frame_id = frame_id
         self.stamp = stamp
         if stamp is None:
-            self.stamp = time.time()
+            self.stamp = datetime.datetime.utcnow().timestamp()
 
     def __str__(self):
         return "Header:\n  - seq={}\n  - stamp={}\n  - frame_id={})\n".format(

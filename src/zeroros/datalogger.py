@@ -21,7 +21,7 @@ class DataLogger:
             '{"class": "'
             + str(type(msg).__name__)
             + '", "timestamp": "'
-            + str(datetime.datetime.now().timestamp())
+            + str(datetime.datetime.utcnow().timestamp())
             + '", "message": '
             + json.dumps(msg.to_json())
             + "}\n"
