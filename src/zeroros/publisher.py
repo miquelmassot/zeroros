@@ -1,10 +1,16 @@
+import asyncio
 import json
 import time
+import sys
 
 import zmq
 
 from zeroros.messages import Header, Message
 from zeroros.topic import validate_topic
+
+
+if sys.platform == 'win32':
+   asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 
 class Publisher:
