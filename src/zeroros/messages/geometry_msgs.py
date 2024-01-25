@@ -1,12 +1,7 @@
-from typing import Annotated, Literal
-
 import numpy as np
-import numpy.typing as npt
 
 from . import Message
 from .std_msgs import Header
-
-Float64Array6x6 = Annotated[npt.NDArray[np.float64], Literal[4]]
 
 
 class Vector3(Message):
@@ -144,7 +139,7 @@ class PoseStamped(Message):
 
 
 class PoseWithCovariance(Message):
-    def __init__(self, pose=Pose(), covariance: Float64Array6x6 = []):
+    def __init__(self, pose=Pose(), covariance=[]):
         self.pose = pose  # type: Pose
         self.covariance = covariance  # type: list
 
@@ -162,7 +157,7 @@ class PoseWithCovariance(Message):
 
 
 class TwistWithCovariance(Message):
-    def __init__(self, twist=Twist(), covariance: Float64Array6x6 = []):
+    def __init__(self, twist=Twist(), covariance=[]):
         self.twist = twist  # type: Twist
         self.covariance = covariance  # type: list
 
