@@ -32,7 +32,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="zeroros",
-    version="1.0.3",
+    version="1.0.5",
     description="ZeroROS middleware",
     long_description=long_description,
     long_description_content_type="text/markdown",

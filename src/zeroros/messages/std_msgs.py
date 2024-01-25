@@ -1,4 +1,6 @@
-import time
+import datetime
+import numpy as np
+import numpy.typing as npt
 
 from . import Message
 
@@ -9,7 +11,7 @@ class Header:
         self.frame_id = frame_id
         self.stamp = stamp
         if stamp is None:
-            self.stamp = time.time()
+            self.stamp = datetime.datetime.utcnow().timestamp()
 
     def __str__(self):
         return "Header:\n  - seq={}\n  - stamp={}\n  - frame_id={})\n".format(
@@ -96,3 +98,103 @@ class Bool(GenericTypeData):
 
     def __str__(self):
         return "Bool:\n  - data={}\n".format(self.data)
+
+
+class MultiArrayDimension:
+    def __init__(self, label: str = "", size: int = 0, stride: int = 0):
+        self.label = label
+        self.size = size
+        self.stride = stride
+
+    def __str__(self):
+        return (
+            "MultiArrayDimension:\n  - label={}\n  - size={}\n  - stride={}\n".format(
+                self.data["label"], self.data["size"], self.data["stride"]
+            )
+        )
+
+
+class MultiArrayLayout:
+    def __init__(self, dim: MultiArrayDimension = None, data_offset: int = 0):
+        self.dim = dim
+        self.data_offset = data_offset
+
+
+class Float32MultiArray:
+    def __init__(
+        self, layout: MultiArrayLayout = None, data: npt.NDArray[np.float32] = None
+    ):
+        self.layout = layout
+        self.data = data
+
+        # Check if the layout matches the data
+        if layout is not None and data is not None:
+            if layout.dim.size != len(data):
+                raise ValueError(
+                    "The size of the layout does not match the size of the data."
+                )
+
+    def __str__(self):
+        return "Float32MultiArray:\n  - layout={}\n  - data={}\n".format(
+            self.layout, self.data
+        )
+
+
+class Float64MultiArray:
+    def __init__(
+        self, layout: MultiArrayLayout = None, data: npt.NDArray[np.float64] = None
+    ):
+        self.layout = layout
+        self.data = data
+
+        # Check if the layout matches the data
+        if layout is not None and data is not None:
+            if layout.dim.size != len(data):
+                raise ValueError(
+                    "The size of the layout does not match the size of the data."
+                )
+
+    def __str__(self):
+        return "Float64MultiArray:\n  - layout={}\n  - data={}\n".format(
+            self.layout, self.data
+        )
+
+
+class Int32MultiArray:
+    def __init__(
+        self, layout: MultiArrayLayout = None, data: npt.NDArray[np.int32] = None
+    ):
+        self.layout = layout
+        self.data = data
+
+        # Check if the layout matches the data
+        if layout is not None and data is not None:
+            if layout.dim.size != len(data):
+                raise ValueError(
+                    "The size of the layout does not match the size of the data."
+                )
+
+    def __str__(self):
+        return "Int32MultiArray:\n  - layout={}\n  - data={}\n".format(
+            self.layout, self.data
+        )
+
+
+class Int64MultiArray:
+    def __init__(
+        self, layout: MultiArrayLayout = None, data: npt.NDArray[np.int64] = None
+    ):
+        self.layout = layout
+        self.data = data
+
+        # Check if the layout matches the data
+        if layout is not None and data is not None:
+            if layout.dim.size != len(data):
+                raise ValueError(
+                    "The size of the layout does not match the size of the data."
+                )
+
+    def __str__(self):
+        return "Int64MultiArray:\n  - layout={}\n  - data={}\n".format(
+            self.layout, self.data
+        )

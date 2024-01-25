@@ -1,10 +1,16 @@
+import asyncio
 import json
 import time
+import sys
 
 import zmq
 
 from zeroros.messages import Header, Message
 from zeroros.topic import validate_topic
+
+
+if sys.platform == 'win32':
+   asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 
 class Publisher:
@@ -14,8 +20,10 @@ class Publisher:
         message_class: type[Message],
         ip: str = "127.0.0.1",
         port: int = 5555,
+        verbose: bool = False,
     ):
-        print("Creating publisher for topic: ", topic)
+        if verbose:
+            print("Creating publisher for topic: ", topic)
         self.topic = validate_topic(topic)
         self.message_class = message_class
         self.ip = ip

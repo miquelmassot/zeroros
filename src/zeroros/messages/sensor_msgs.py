@@ -5,7 +5,7 @@ from .std_msgs import Header
 
 
 class LaserScan(Message):
-    def __init__(self, ranges=[], intensitites=[]):
+    def __init__(self, ranges=[], intensitites=[], angles=[]):
         self.header = Header()
         self.angle_min = None
         self.angle_max = None
@@ -15,6 +15,7 @@ class LaserScan(Message):
         self.range_min = None
         self.range_max = None
         self.ranges = np.array(ranges)
+        self.angles = np.array(angles)
         # Change NaNs to range_max
         if np.isnan(self.ranges).any():
             self.ranges[np.isnan(self.ranges)] = self.range_max
@@ -32,6 +33,7 @@ class LaserScan(Message):
         msg += "Range Max:    " + str(self.range_max) + "\n"
         msg += "Ranges:       " + str(self.ranges) + "\n"
         msg += "Intensities:  " + str(self.intensities) + "\n"
+        msg += "Angles:       " + str(self.angles) + "\n"
         return msg
 
     def to_json(self):
@@ -46,6 +48,7 @@ class LaserScan(Message):
             "range_max": self.range_max,
             "ranges": self.ranges.tolist(),
             "intensities": self.intensities.tolist(),
+            "angles": self.angles.tolist(),
         }
 
     def from_json(self, msg):
@@ -59,3 +62,4 @@ class LaserScan(Message):
         self.range_max = msg["range_max"]
         self.ranges = np.array(msg["ranges"])
         self.intensities = np.array(msg["intensities"])
+        self.angles = np.array(msg["angles"])
