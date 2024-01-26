@@ -3,6 +3,7 @@
 </p>
 
 # Zero-dependency ROS-like middleware for Python
+
 This library is intended to be used for small projects that require a simple middleware
 for communication between processes. It is not intended to be a replacement for ROS.
 
@@ -26,9 +27,11 @@ for communication between processes. It is not intended to be a replacement for 
 </p>
 
 ## Why ZeroROS?
+
 See these discussions in [ROS Discourse](https://discourse.ros.org/t/teaching-with-ros-or-zeroros-at-university/32124) and this one in [reddit/ROS](https://www.reddit.com/r/ROS/comments/14kh7pt/teaching_ros_zeroros_at_university_students/).
 
 ## Installation
+
 Use pip to install the library:
 
 ```bash
@@ -36,10 +39,12 @@ pip install zeroros
 ```
 
 ## Usage
-The library is composed of three main classes: `Publisher`,  `Subscriber` and 
+
+The library is composed of three main classes: `Publisher`, `Subscriber` and
 `MessageBroker`.
 
 ### MessageBroker
+
 The `MessageBroker` class is used to create a message broker that can be used by
 publishers and subscribers to communicate with each other.
 
@@ -50,6 +55,7 @@ broker = MessageBroker()
 ```
 
 ### Publisher
+
 The `Publisher` class is used to publish messages to a topic. The constructor takes two
 arguments: the topic name and the message type. The topic name is a string, while the
 message type is a Python class. The message type is used to serialize and deserialize
@@ -63,6 +69,7 @@ pub.publish("Hello world!")
 ```
 
 ### Subscriber
+
 The `Subscriber` class is used to subscribe to a topic and receive messages. The constructor
 takes two arguments: the topic name and the message type. The topic name is a string, while
 the message type is a Python class. The message type is used to serialize and deserialize
@@ -85,24 +92,59 @@ sub.stop()
 ```
 
 ### Messages
+
 The library comes with a few built-in messages that can be used out of the box. The
 following messages are available:
 
-* `std_msgs.String`
-* `std_msgs.Int`
-* `std_msgs.Float`
-* `std_msgs.Bool`
-* `std_msgs.Header`
-* `geometry_msgs.Vector3`
-* `geometry_msgs.Vector3Stamped`
-* `geometry_msgs.Twist`
-* `geometry_msgs.Quaternion`
-* `geometry_msgs.Pose`
-* `geometry_msgs.PoseStamped`
-* `geometry_msgs.PoseWithCovariance`
-* `geometry_msgs.TwistWithCovariance`
-* `nav_msgs.Odometry`
-* `nav_msgs.Path`
-* `sensors_msgs.LaserScan`
-* More to come...
+- `std_msgs.String`
+- `std_msgs.Int`
+- `std_msgs.Float`
+- `std_msgs.Bool`
+- `std_msgs.Header`
+- `geometry_msgs.Vector3`
+- `geometry_msgs.Vector3Stamped`
+- `geometry_msgs.Twist`
+- `geometry_msgs.Quaternion`
+- `geometry_msgs.Pose`
+- `geometry_msgs.PoseStamped`
+- `geometry_msgs.PoseWithCovariance`
+- `geometry_msgs.TwistWithCovariance`
+- `nav_msgs.Odometry`
+- `nav_msgs.Path`
+- `sensors_msgs.LaserScan`
+- More to come...
 
+### Logging
+
+This library implements a class called `DataLogger` that can be used to log data in JSON format.
+To use the logger, simply create an instance of the class and call the `log` method with the
+data to be logged. The data can be any Python object that can be serialized to JSON.
+
+```python
+from zeroros import DataLogger
+from zeroros.messages import String
+
+logger = DataLogger("log_file.json")
+
+msg = String()
+msg.data = "Hello world!"
+
+logger.log(msg, topic_name="/topic_name")
+```
+
+The content of the log file will be:
+
+```json
+[
+  {
+    "class": "String",
+    "topic_name": "/topic_name",
+    "timestamp": 1622126400.0,
+    "message": {
+      "data": "Hello world!"
+    }
+  }
+]
+```
+
+In the examples folder you will find a python script to convert JSON logs into CSV files.
