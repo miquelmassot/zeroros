@@ -20,7 +20,7 @@ class Rate:
         @param frequency_hz: Frequency rate in Hz to determine sleeping
         @type  frequency_hz: float
         """
-        self.last_time = float(datetime.timestamp(datetime.utcnow()))
+        self.last_time = datetime.utcnow().timestamp()
         self.sleep_dur = 1.0 / frequency_hz
 
     def _remaining(self, curr_time):
@@ -45,8 +45,14 @@ class Rate:
         @return: time remaining
         @rtype: L{Time}
         """
-        curr_time = float(datetime.timestamp(datetime.utcnow()))
+        curr_time = datetime.utcnow().timestamp()
         return self._remaining(curr_time)
+
+    def reset(self):
+        """
+        Reset the rate timer.
+        """
+        self.last_time = datetime.utcnow().timestamp()
 
     def sleep(self):
         """
@@ -54,7 +60,7 @@ class Rate:
         account the time elapsed since the last successful
         sleep().
         """
-        curr_time = float(datetime.timestamp(datetime.utcnow()))
+        curr_time = datetime.utcnow().timestamp()
         sleep(self._remaining(curr_time))
         self.last_time = self.last_time + self.sleep_dur
 
@@ -67,13 +73,30 @@ class Rate:
 if __name__ == "__main__":
     import random
 
+    count = 0
+
     r = Rate(10.0)
-    curr_time = float(datetime.timestamp(datetime.utcnow()))
-    while True:
-        diff = 1.0 / (float(datetime.timestamp(datetime.utcnow())) - curr_time)
-        curr_time = float(datetime.timestamp(datetime.utcnow()))
+    curr_time = datetime.utcnow().timestamp()
+    while True and count < 10:
+        diff = 1.0 / (datetime.utcnow().timestamp() - curr_time)
+        curr_time = datetime.utcnow().timestamp()
         x = random.random() / 10.0
         print(diff, x)
         # Random time-lenght long computation
         time.sleep(x)
         r.sleep()
+        count += 1
+
+    r = Rate(1.0)
+    count = 0
+    while True:
+        x = random.random() / 10.0
+        time.sleep(x)
+        if r.remaining() <= 0:
+            diff = 1.0 / (datetime.utcnow().timestamp() - curr_time)
+            curr_time = datetime.utcnow().timestamp()
+            print(diff, x, r.remaining())  # Random time-lenght long computation
+            r.reset()
+            count += 1
+        if count >= 10:
+            break
