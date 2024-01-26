@@ -15,11 +15,13 @@ class DataLogger:
         # Open the log file
         self.file = open(self.log_file, "w")
 
-    def log(self, msg: type[Message]):
+    def log(self, msg: type[Message], topic_name: str = "unknown"):
         # Write message to file
         self.file.write(
             '{"class": "'
             + str(type(msg).__name__)
+            + '", "topic_name": "'
+            + topic_name
             + '", "timestamp": "'
             + str(datetime.datetime.utcnow().timestamp())
             + '", "message": '
