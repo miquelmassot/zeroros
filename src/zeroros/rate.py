@@ -82,7 +82,7 @@ if __name__ == "__main__":
         curr_time = datetime.utcnow().timestamp()
         x = random.random() / 10.0
         print(diff, x)
-        # Random time-lenght long computation
+        # Random time-length long computation
         time.sleep(x)
         r.sleep()
         count += 1
@@ -95,7 +95,7 @@ if __name__ == "__main__":
         if r.remaining() <= 0:
             diff = 1.0 / (datetime.utcnow().timestamp() - curr_time)
             curr_time = datetime.utcnow().timestamp()
-            print(diff, x, r.remaining())  # Random time-lenght long computation
+            print(diff, x, r.remaining())  # Random time-length long computation
             r.reset()
             count += 1
         if count >= 10:

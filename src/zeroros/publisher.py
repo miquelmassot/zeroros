@@ -37,7 +37,7 @@ class Publisher:
             raise e
 
     def publish(self, message):
-        # Chech message is of the correct type
+        # Check message is of the correct type
         if not isinstance(message, self.message_class):
             raise TypeError(f"Message must be of type {self.message_class.__name__}")
         message_str = json.dumps(message.to_json())

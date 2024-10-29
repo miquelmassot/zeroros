@@ -11,7 +11,7 @@ class MessageBroker:
         self.ip = ip
         self.xsub_port = xsub_port
         self.xpub_port = xpub_port
-        # run broker in seperate thread
+        # run broker in separate thread
         self.broker_thread = threading.Thread(target=self.config_broker)
         self.broker_thread.start()
 
