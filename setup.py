@@ -32,14 +32,14 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="zeroros",
-    version="1.0.9",
+    version="1.1.0",
     description="ZeroROS middleware",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Miquel Massot",
     author_email="miquel.massot@gmail.com",
-    maintainer="Miquel Massot",
-    maintainer_email="miquel.massot@gmail.com",
+    maintainer="Miquel Massot; Blair Thornton",
+    maintainer_email="miquel.massot@gmail.com; b.thornton@soton.ac.uk",
     url=GITHUB_URL,
     packages=find_packages(where="src"),
     package_dir={"": "src"},

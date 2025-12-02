@@ -22,6 +22,7 @@ from .geometry_msgs import (
     TwistWithCovariance,
 )  # noqa: F401
 from .sensor_msgs import LaserScan  # noqa: F401
+from .range_bearing_msgs import RBLaserScan  # noqa: F401
 from .nav_msgs import Odometry, Path  # noqa: F401
 from .std_msgs import (
     Header,
