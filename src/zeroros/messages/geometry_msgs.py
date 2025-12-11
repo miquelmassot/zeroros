@@ -123,7 +123,7 @@ class Pose(Message):
 
 
 class PoseStamped(Message):
-    def __init__(self, header=None, pose=Pose()):
+    def __init__(self, header=Header(), pose=Pose()):
         self.header = header  # type: Header
         self.pose = pose  # type: Pose
 
